@@ -56,7 +56,6 @@
     --form-wizard-padding-bottom: 160px;
     --form-wizard-step-legend-padding: 10px;
     --form-wizard-step-legend-font-size: 1.1rem;
-    --form-field-gap: 5px;
 }
 
 * {
@@ -135,8 +134,8 @@ main .form select {
 }
 
 main .form select {
-  padding-top: 0;
-  padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 main .form input[type='file'] {
@@ -203,19 +202,19 @@ main .form form p {
 
 main .form form .checkbox-wrapper, main .form form .radio-wrapper {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     margin: 0;
     gap: 8px;
 }
 
-main .form form fieldset > .radio-wrapper,
-main .form form fieldset > .checkbox-wrapper {
-    margin-left: var(--form-field-gap);
+main .form form fieldset > .radio-wrapper:first-of-type,
+main .form form fieldset > .checkbox-wrapper:first-of-type {
+    margin: var(--form-field-gap);
 }
 
 main .form .radio-wrapper  label,
 main .form .checkbox-wrapper label {
-    flex-basis: calc(100% - 24px);
+    flex-basis: calc(100% - 28px);
 }
 
 input::file-selector-button {
@@ -267,36 +266,40 @@ main .file-wrapper .field-dropregion {
     text-align: center;
 }
 
-main .form form .item-remove {
-    padding: 0;
-    background: #fff;
-    padding-left: 10px;
+/* Repeatable Styling */
+main .form form .repeat-actions {
+    grid-column: span 12;
+    order: 2;
 }
 
+main .form form .item-remove,
 main .form form .item-add {
     overflow: unset;
-    display: flex;
-    justify-content: center;
 }
 
+main .form form .item-remove {
+    justify-self: end;
+    grid-column: span 12;
+    order: 1;
+}
+
+main .form form div[data-variant="addRemoveButtons"] .item-add,
+main .form form div[data-variant="addRemoveButtons"] .item-remove {
+    display: block;
+}
+
+/* End of Repeatable Styling */
 main .form .file-description{
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-top: 5px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 5px;
 }
 
 main .form .file-description .file-description-name {
-  cursor: pointer;
-  text-decoration: underline;
-  flex: 1;
-}
-
-main .form form .item-remove span {
-    display: block;
-    width: 20px;
-    height: 20px;
-    background: url('../../icons/delete.svg') no-repeat;
+    cursor: pointer;
+    text-decoration: underline;
+    flex: 1;
 }
 
 main .file-wrapper .file-description button {
@@ -343,13 +346,13 @@ main .form .button-wrapper button[disabled]:hover {
 
 /** Wizard Styling */
 main .form form .wizard  {
-  display: grid;
-  counter-reset: wizard-step-counter;
-  grid-template-columns: minmax(0, 1fr);
-  border: var(--form-wizard-border) solid var(--form-wizard-border-color);
-  background-color: var( --form-wizard-background-color);
-  gap: unset;
-  padding: 20px var(--form-wizard-padding);
+    display: grid;
+    counter-reset: wizard-step-counter;
+    grid-template-columns: minmax(0, 1fr);
+    border: var(--form-wizard-border) solid var(--form-wizard-border-color);
+    background-color: var( --form-wizard-background-color);
+    gap: unset;
+    padding: 20px var(--form-wizard-padding);
 }
 
 main .form form .wizard > legend{
@@ -358,7 +361,7 @@ main .form form .wizard > legend{
 }
 
 main .form form .wizard > .field-description{
-  width: 100%;
+    width: 100%;
 }
 
 main .form form .wizard > fieldset > legend{
@@ -397,27 +400,27 @@ main .form form .wizard .wizard-button-wrapper .field-wrapper{
 }
 
 main .form form .wizard .wizard-menu-item {
-  counter-increment: wizard-step-counter;
+    counter-increment: wizard-step-counter;
 }
 
 main .form form .wizard .wizard-menu-item::before {
-  content: counter(wizard-step-counter);
-  border: 2px solid var(--form-wizard-number-color);
-  color: var(--form-wizard-number-color);
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
-  text-align: center;
-  line-height: 2;
-  display: inline-block;
+    content: counter(wizard-step-counter);
+    border: 2px solid var(--form-wizard-number-color);
+    color: var(--form-wizard-number-color);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 2;
+    display: inline-block;
 }
 
 main .form form .wizard .wizard-menu-active-item::before{
-  border: 2px solid var(--form-wizard-number-color);
-  background: var(--form-wizard-number-color);
-  color: var(--background-color-primary);
-  font-weight: 600;
+    border: 2px solid var(--form-wizard-number-color);
+    background: var(--form-wizard-number-color);
+    color: var(--background-color-primary);
+    font-weight: 600;
 }
 
 @media (width >= 600px) {
@@ -428,24 +431,24 @@ main .form form .wizard .wizard-menu-active-item::before{
 
 /* wizard title on left */
 main .form form .wizard.left{
-  display: flex;
+    display: flex;
 }
 
 main .form form .wizard.left .wizard-menu-items{
-  flex-direction: column;
-  width: 300px;
+    flex-direction: column;
+    width: 300px;
 }
 
 main form .panel-wrapper {
-  display: flex;
-  padding: 0;
-  flex-direction: column;
+    display: flex;
+    padding: 0;
+    flex-direction: column;
 }
 
 main .form form .panel-wrapper{
-  display: grid;
-  grid-template-columns: repeat(var(--form-columns), minmax(0, 1fr));
-  gap: var(--form-field-vert-gap) var(--form-field-horz-gap);
+    display: grid;
+    grid-template-columns: repeat(var(--form-columns), minmax(0, 1fr));
+    gap: var(--form-field-vert-gap) var(--form-field-horz-gap);
 }
 
 main .form form .repeat-wrapper{
@@ -455,10 +458,11 @@ main .form form .repeat-wrapper{
 }
 
 main .form form .wizard.left .panel-wrapper{
-  flex: 1;
+    flex: 1;
 }
 
 @media (width >= 1200px) {
+    main .form form .checkbox-wrapper,
     main .form form .form-textarea-wrapper,
     main .form form .file-wrapper,
     main .form form .panel-wrapper {
@@ -490,19 +494,19 @@ main .form .form-message.error-message {
 }
 
 main .form .file-wrapper .file-drag-area {
-  border: 1px dashed var(--border-color);
-  border-radius: 5px;
-  padding: 10px 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+    border: 1px dashed var(--border-color);
+    border-radius: 5px;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* grid css */
 main .form form .field-wrapper .field-description{
-  grid-column: span 12;
+    grid-column: span 12;
 }
 
 main .form form .field-wrapper.col-12 {
@@ -514,7 +518,7 @@ main .form form .field-wrapper.col-11 {
 }
 
 main .form form .field-wrapper.col-10 {
-  grid-column: span 10;
+    grid-column: span 10;
 }
 
 main .form form .field-wrapper.col-9 {
@@ -530,23 +534,23 @@ main .form form .field-wrapper.col-7 {
 }
 
 main .form form .field-wrapper.col-6 {
-      grid-column: span 6;
+    grid-column: span 6;
 }
 
 main .form form .field-wrapper.col-5 {
-      grid-column: span 5;
+    grid-column: span 5;
 }
 
 main .form form .field-wrapper.col-4 {
-      grid-column: span 4;
+    grid-column: span 4;
 }
 
 main .form form .field-wrapper.col-3 {
-      grid-column: span 3;
+    grid-column: span 3;
 }
 
 main .form form .field-wrapper.col-2 {
-      grid-column: span 2;
+    grid-column: span 2;
 }
 
 main .form form .field-wrapper.col-1 {
@@ -554,8 +558,8 @@ main .form form .field-wrapper.col-1 {
 }
 
 main .form .form-image-wrapper  img {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 main form .wizard > .current-wizard-step.panel-wrapper:first-of-type ~ .wizard-button-wrapper > .wizard-button-prev,
@@ -565,10 +569,4 @@ main form .wizard > .current-wizard-step.panel-wrapper:last-of-type ~ .wizard-bu
 
 main .form form:not(.edit-mode) .captcha-wrapper{
     display: none ;
-}
-
-main .form form .horizontal {
-    display: flex;
-    flex-direction: row;
-    gap: inherit;
 }
